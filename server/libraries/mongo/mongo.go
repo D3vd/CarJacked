@@ -40,7 +40,7 @@ func (m *Mongo) Init() {
 		log.Fatal("Error while intializing MongoDB server. Make sure the URI is correct..")
 	}
 
-	// Connect to MOngoDB server with context
+	// Connect to MongoDB server with context
 	err = client.Connect(context.TODO())
 
 	if err != nil {

@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
+	"../controllers/casecnt"
 	"../libraries/mongo"
 )
 
@@ -18,12 +19,6 @@ func NewRouter() *gin.Engine {
 
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
-
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
 
 	m := &mongo.Mongo{}
 	m.Init()
@@ -57,6 +52,21 @@ func NewRouter() *gin.Engine {
 
 		c.JSON(200, gin.H{
 			"message": "success",
+		})
+	})
+
+	caseRouter := router.Group("/case")
+	{
+		c := casecnt.Controller{
+			M: m,
+		}
+
+		caseRouter.GET("", c.CreateCase)
+	}
+
+	router.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
 		})
 	})
 

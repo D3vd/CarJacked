@@ -43,7 +43,7 @@ func NewRouter() *gin.Engine {
 			if e != nil {
 				log.Fatal(e)
 			}
-			// fmt.Println("cur..>", cur, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
+
 			results = append(results, result)
 		}
 

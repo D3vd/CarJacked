@@ -24,6 +24,7 @@ type User struct {
 type Car struct {
 	Color string `json:"color"`
 	RegNo string `json:"regNo"`
+	// LastSeen time.Time `json:"lastSeen"`
 	// Location Location `json:"location"`
 }
 

@@ -35,7 +35,7 @@ func NewRouter() *gin.Engine {
 			M: m,
 		}
 
-		authRouter.GET("/login", a.Login)
+		authRouter.POST("/login", a.Login)
 		authRouter.GET("/logout", a.Logout)
 	}
 

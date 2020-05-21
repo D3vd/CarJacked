@@ -4,11 +4,11 @@ import (
 	"../../models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"log"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // CreateNewUser : Create a admin user and return the UserID
-func (m Mongo) CreateNewUser(username string, password string) (userID interface{}, error int) {
+func (m Mongo) CreateNewUser(username string, password string) (userID string, error int) {
 
 	//	Create Auth Model
 	newUser := models.User{
@@ -24,24 +24,23 @@ func (m Mongo) CreateNewUser(username string, password string) (userID interface
 	// Check for errors
 	if err != nil {
 		if err.Error() != "mongo: no documents in result" {
-			return 0, 500
+			return "", 500
 		}
 	}
 
 	// Make sure userPresent is nil
 	if userPresent != nil {
-		return 0, 400
+		return "", 400
 	}
 
 	// Insert new user into DB
 	insertResult, err := m.DB.Collection("user").InsertOne(context.Background(), newUser)
 
 	if err != nil {
-		log.Println(err)
 		return "", 500
 	}
 
-	return insertResult.InsertedID, 0
+	return insertResult.InsertedID.(primitive.ObjectID).Hex(), 0
 }
 
 // GetUserPasswordAndID : Queries DB for username and returns password and userID

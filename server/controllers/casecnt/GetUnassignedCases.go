@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// GetUnassignedCases : Gets all unassigned cases
 func (ca Controller) GetUnassignedCases(c *gin.Context) {
 	cases, err := ca.M.GetAllUnassignedCases()
 

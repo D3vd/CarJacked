@@ -8,7 +8,7 @@ import (
 type Case struct {
 	ID       primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Officer  primitive.ObjectID `json:"officer,omitempty" bson:"officer,omitempty"`
-	User     User               `json:"user"`
+	User     User               `json:"auth"`
 	Car      Car                `json:"car"`
 	Active   bool               `json:"active"`
 	Assigned bool               `json:"assigned"`

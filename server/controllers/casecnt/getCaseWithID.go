@@ -8,6 +8,7 @@ import (
 	"../../models"
 )
 
+// GetCaseWithID : Get One case filtered by ID
 func (ca Controller) GetCaseWithID(c *gin.Context) {
 	caseID := c.Param("caseID")
 

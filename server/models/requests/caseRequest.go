@@ -2,7 +2,7 @@ package requests
 
 // CaseRequest : Request body to create a new Case
 type CaseRequest struct {
-	User User `json:"user"`
+	User User `json:"auth"`
 	Car  Car  `json:"car"`
 }
 

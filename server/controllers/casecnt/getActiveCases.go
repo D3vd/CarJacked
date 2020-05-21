@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// GetActiveCases : Get all active cases
 func (ca Controller) GetActiveCases(c *gin.Context) {
 
 	cases, err := ca.M.GetAllActiveCases()

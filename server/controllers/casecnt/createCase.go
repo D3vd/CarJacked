@@ -2,7 +2,6 @@ package casecnt
 
 import (
 	"context"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +19,7 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	// Parse Request Body
 	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"code": http.StatusBadRequest,
+			"code":    http.StatusBadRequest,
 			"message": "Wrong Request Body. Please try again",
 		})
 		return
@@ -29,7 +28,7 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	// Validate if all the required fields are present
 	if req.User.Name == "" || req.User.Email == "" || req.User.Phone == "" || req.Car.Color == "" || req.Car.RegNo == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"code": http.StatusBadRequest,
+			"code":    http.StatusBadRequest,
 			"message": "Please ensure that all the fields are filled",
 		})
 		return
@@ -41,7 +40,7 @@ func (ca Controller) CreateCase(c *gin.Context) {
 
 	newCase := models.Case{
 		User: models.User{
-			Name: req.User.Name,
+			Name:  req.User.Name,
 			Email: req.User.Email,
 			Phone: req.User.Phone,
 		},
@@ -50,26 +49,26 @@ func (ca Controller) CreateCase(c *gin.Context) {
 			RegNo: req.Car.RegNo,
 		},
 		Active: true,
+		Assigned: false,
 	}
 
 	// TODO: Assign a Free Officer to the case
 
-	// Write the onto the DB
-
+	// Write the new Case onto the DB
 	insertResult, err := ca.M.DB.Collection("case").InsertOne(context.Background(), newCase)
 
-	if err != nil {
+	if err != nil || insertResult.InsertedID == nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"code" : http.StatusInternalServerError,
+			"code":    http.StatusInternalServerError,
 			"message": "Error while inserting case to DB. Please try again.",
 		})
+		return
 	}
 
-	log.Println(insertResult)
-
 	c.JSON(http.StatusOK, gin.H{
-		"code": http.StatusOK,
+		"code":    http.StatusOK,
 		"message": "Successfully Added Case to DB",
+		"id":      insertResult.InsertedID,
 	})
 
 	return

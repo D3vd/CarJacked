@@ -62,6 +62,7 @@ func NewRouter() *gin.Engine {
 		}
 
 		caseRouter.POST("", c.CreateCase)
+		caseRouter.GET("/:caseID", c.GetCaseWithID)
 	}
 
 	router.GET("/ping", func(c *gin.Context) {

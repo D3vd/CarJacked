@@ -17,7 +17,7 @@ type Case struct {
 type User struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
-	Phone int    `json:"phone"`
+	Phone string `json:"phone"`
 }
 
 // Car : Details of the missing Car

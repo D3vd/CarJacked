@@ -2,12 +2,43 @@ package mongo
 
 import (
 	"context"
+	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"../../models"
 )
+
+// GetAllUnassignedCases : Get all active cases
+func (m Mongo) GetAllUnassignedCases() (cases []primitive.M ,err error) {
+
+	cur, err := m.DB.Collection("case").Find(context.Background(), bson.M{"assigned": false})
+
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	cases, err = CaseCursor(cur)
+
+	return cases,nil
+}
+
+// GetAllActiveCases : Get all active cases
+func (m Mongo) GetAllActiveCases() (cases []primitive.M ,err error) {
+
+	cur, err := m.DB.Collection("case").Find(context.Background(), bson.M{"active": true})
+
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	cases, err = CaseCursor(cur)
+
+	return cases,nil
+}
 
 // CreateNewCase : Create New Case
 func (m Mongo) CreateNewCase(newCase models.Case) (id interface{}, err error) {

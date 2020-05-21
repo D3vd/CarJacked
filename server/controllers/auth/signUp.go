@@ -4,7 +4,6 @@ import (
 	"../../models"
 	"../../models/requests"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 )
 

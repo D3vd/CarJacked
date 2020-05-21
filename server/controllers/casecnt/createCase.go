@@ -1,7 +1,6 @@
 package casecnt
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -54,10 +53,9 @@ func (ca Controller) CreateCase(c *gin.Context) {
 
 	// TODO: Assign a Free Officer to the case
 
-	// Write the new Case onto the DB
-	insertResult, err := ca.M.DB.Collection("case").InsertOne(context.Background(), newCase)
+	insertedId, err := ca.M.CreateNewCase(newCase)
 
-	if err != nil || insertResult.InsertedID == nil {
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"code":    http.StatusInternalServerError,
 			"message": "Error while inserting case to DB. Please try again.",
@@ -68,7 +66,7 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    http.StatusOK,
 		"message": "Successfully Added Case to DB",
-		"id":      insertResult.InsertedID,
+		"id":      insertedId,
 	})
 
 	return

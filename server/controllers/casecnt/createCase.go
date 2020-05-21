@@ -25,7 +25,11 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	}
 
 	// Validate if all the required fields are present
-	if req.User.Name == "" || req.User.Email == "" || req.User.Phone == "" || req.Car.Color == "" || req.Car.RegNo == "" {
+	if req.User.Name == "" ||
+		req.User.Email == "" ||
+		req.User.Phone == "" ||
+		req.Car.Color == "" ||
+		req.Car.RegNo == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code":    http.StatusBadRequest,
 			"message": "Please ensure that all the fields are filled",
@@ -38,7 +42,7 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	// Convert the request body to newCase Model
 
 	newCase := models.Case{
-		User: models.User{
+		UserInfo: models.UserInfo{
 			Name:  req.User.Name,
 			Email: req.User.Email,
 			Phone: req.User.Phone,
@@ -47,7 +51,7 @@ func (ca Controller) CreateCase(c *gin.Context) {
 			Color: req.Car.Color,
 			RegNo: req.Car.RegNo,
 		},
-		Active: true,
+		Active:   true,
 		Assigned: false,
 	}
 

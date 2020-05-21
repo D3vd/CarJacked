@@ -37,6 +37,7 @@ func NewRouter() *gin.Engine {
 
 		authRouter.POST("/login", a.Login)
 		authRouter.GET("/logout", a.Logout)
+		authRouter.POST("/signUp", a.SignUp)
 	}
 
 	// Routes for admin operations [Requires Authentication]

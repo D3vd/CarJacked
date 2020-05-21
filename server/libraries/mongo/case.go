@@ -47,7 +47,7 @@ func (m Mongo) CreateNewCase(newCase models.Case) (id interface{}, err error) {
 	insertResult, err := m.DB.Collection("case").InsertOne(context.Background(), newCase)
 
 	if err != nil || insertResult.InsertedID == nil {
-		return  0, nil
+		return  0, err
 	}
 
 	return insertResult.InsertedID, nil
@@ -74,7 +74,6 @@ func (m Mongo) GetCaseByID(id string, caseDoc *models.Case) (error int) {
 		if err.Error() == "mongo: no documents in result" {
 			return 400
 		}
-
 		return 500
 	}
 

@@ -15,6 +15,17 @@ func (a Controller) Login(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
+	// Check if the user is already logged in
+	sessionID := session.Get("userID")
+
+	if sessionID != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"code": http.StatusBadRequest,
+			"message": "User is already logged in",
+		})
+		return
+	}
+
 	// Validate form input
 	if strings.Trim(username, " ") == "" || strings.Trim(password, " ") == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -24,18 +35,37 @@ func (a Controller) Login(c *gin.Context) {
 		return
 	}
 
-	// TODO: Query DB with username for password
+	// Query DB with username for password
+	userPassword, userID, err := a.M.GetUserPasswordAndID(username)
 
-	// TODO: Check if passwords match
-	if username != "admin" || password != "admin123" {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Authentication failed"})
+	// Error Handling for DB username Error
+	if err != 0 {
+		if err == 400 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"code": http.StatusBadRequest,
+				"message": "Username is not present in the DB. Please create a new account",
+			})
+			return
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"code": http.StatusInternalServerError,
+				"message": "Error while querying DB for username. Please try again",
+			})
+			return
+		}
+	}
+
+	// Check if passwords match
+	if password != userPassword {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"code": http.StatusUnauthorized,
+			"message": "Authentication Failed. Wrong password",
+		})
 		return
 	}
 
-	// TODO: Get userID and set it for session
-
-	// Set and save session
-	session.Set("userID", username)
+	// Get userID and set it for session
+	session.Set("userID", userID)
 	if err := session.Save(); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"code": http.StatusInternalServerError,

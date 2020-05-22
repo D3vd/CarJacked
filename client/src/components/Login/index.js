@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { navigate } from "gatsby";
 
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
@@ -22,7 +23,7 @@ function Login() {
       .then((res) => {
         if (res.data.code === 200) {
           localStorage.setItem("userID", res.data.userID);
-          // TODO: Redirect to Dashboard
+          navigate("/dashboard");
         } else {
           console.log(res);
           setError(true);
@@ -45,7 +46,7 @@ function Login() {
       .then((res) => {
         if (res.data.code === 200) {
           localStorage.setItem("userID", res.data.userID);
-          // TODO: Redirect to Dashboard
+          navigate("/dashboard");
         } else if (res.data.code === 400) {
           setUsernameExists(true);
         } else {

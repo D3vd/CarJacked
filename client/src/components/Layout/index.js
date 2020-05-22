@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import { navigate } from "gatsby";
 
 import "antd/dist/antd.css";
 import "./global.scss";
@@ -13,6 +14,8 @@ const Layout = ({ children }) => {
     axios.get("http://localhost:8080/ping").then((res) => {
       console.log(res.data);
     });
+    console.log(localStorage.getItem("userID"));
+    if (localStorage.getItem !== null) navigate("/dashboard");
   }, []);
 
   return (

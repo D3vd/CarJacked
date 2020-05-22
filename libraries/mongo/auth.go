@@ -1,8 +1,8 @@
 package mongo
 
 import (
-	"github.com/R3l3ntl3ss/CarJacked/models"
 	"context"
+	"github.com/R3l3ntl3ss/CarJacked/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -64,5 +64,5 @@ func (m Mongo) GetUserPasswordAndID(username string) (password string, id string
 		return "", "", 500
 	}
 
-	return auth.Password, auth.ID.String(), 0
+	return auth.Password, auth.ID.Hex(), 0
 }

@@ -90,5 +90,6 @@ func (a Controller) Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    http.StatusOK,
 		"message": "Successfully authenticated user",
+		"userID": userID,
 	})
 }

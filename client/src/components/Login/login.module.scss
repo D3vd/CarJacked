@@ -5,6 +5,19 @@
   padding-left: calc((100vw - 70rem) / 2);
 }
 
+.signup {
+  max-width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+}
+
 .login {
   max-width: 300px;
   display: block;

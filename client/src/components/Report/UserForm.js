@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, Input, DatePicker, Button } from "antd";
+import { Form, Input, DatePicker, Button, Alert } from "antd";
 
 import styles from "./report.module.scss";
 
-function UserForm({ onFinish, onFinishFailed }) {
+function UserForm({ onFinish, onFinishFailed, error }) {
   return (
     <div>
       <Form
@@ -12,6 +12,16 @@ function UserForm({ onFinish, onFinishFailed }) {
         onFinishFailed={onFinishFailed}
         className={styles.form}
       >
+        {error ? (
+          <Alert
+            message="Error While Submitting"
+            description="Encountered an error while submitting the form. Please ensure that all the fields are filled / valid and try again"
+            type="error"
+          />
+        ) : (
+          ""
+        )}
+
         <h1>Contact Details</h1>
 
         <Form.Item

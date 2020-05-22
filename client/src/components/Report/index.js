@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 import UserForm from "./UserForm";
+import Submitted from "./Submitted";
 
 import styles from "./report.module.scss";
 
 const Report = () => {
+  let [submitted, setSubmitted] = useState(false);
+  let [error, setError] = useState(false);
+  let [caseID, setCaseID] = useState("");
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    axios
+      .post("http://localhost:8080/case", {
+        user: {
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+        },
+        car: {
+          color: values.color,
+          regNo: values.regNo,
+          model: values.model,
+        },
+      })
+      .then((res) => {
+        if (res.data.code === 200) {
+          setSubmitted(true);
+          setError(false);
+          setCaseID(res.data.id);
+        } else {
+          console.log(res);
+          setError(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -15,8 +47,19 @@ const Report = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Fill in the form to create a Report</h1>
-      <UserForm onFinish={onFinish} onFinishFailed={onFinishFailed} />
+      {submitted ? (
+        <Submitted caseID={caseID} />
+      ) : (
+        <>
+          <h1>Fill in the form to create a Report</h1>
+
+          <UserForm
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            error={error}
+          />
+        </>
+      )}
     </div>
   );
 };

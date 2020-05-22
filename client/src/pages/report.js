@@ -3,10 +3,10 @@ import React from "react";
 import Layout from "../components/Layout";
 import Report from "../components/Report";
 
-const IndexPage = () => (
+const ReportPage = () => (
   <Layout>
     <Report />
   </Layout>
 );
 
-export default IndexPage;
+export default ReportPage;

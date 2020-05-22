@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 import "antd/dist/antd.css";
 import "./global.scss";
@@ -8,6 +9,12 @@ import "./global.scss";
 import Navbar from "../Navbar";
 
 const Layout = ({ children }) => {
+  useEffect(() => {
+    axios.get("http://localhost:8080/ping").then((res) => {
+      console.log(res.data);
+    });
+  }, []);
+
   return (
     <>
       <Helmet>

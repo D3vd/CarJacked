@@ -8,6 +8,7 @@ import (
 	"../libraries/mongo"
 	"../middleware"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
@@ -23,6 +24,7 @@ func NewRouter() *gin.Engine {
 	// Add Logging and Recovery Middleware
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
+	router.Use(cors.Default())
 
 	// Initialize MongoDB server
 	m := &mongo.Mongo{}

@@ -3,8 +3,6 @@ package mongo
 import (
 	"context"
 	"github.com/R3l3ntl3ss/CarJacked/models"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
 )
@@ -37,18 +35,20 @@ func OfficerCursor(cur *mongo.Cursor) (officers []models.Officer ,err error) {
 	return results,nil
 }
 
-func CaseCursor(cur *mongo.Cursor) (cases []primitive.M ,err error) {
+func CaseCursor(cur *mongo.Cursor) (cases []models.Case ,err error) {
+
+	var results []models.Case
 
 	// Iterate through the cursor
 	for cur.Next(context.TODO()) {
 		// Create a value into which the single document can be decoded
-		var elem bson.M
+		var elem models.Case
 		err := cur.Decode(&elem)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		cases = append(cases, elem)
+		results = append(results, elem)
 	}
 
 	if err := cur.Err(); err != nil {
@@ -60,5 +60,5 @@ func CaseCursor(cur *mongo.Cursor) (cases []primitive.M ,err error) {
 		return nil, err
 	}
 
-	return cases,nil
+	return results,nil
 }

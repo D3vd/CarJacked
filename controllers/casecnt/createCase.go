@@ -39,8 +39,29 @@ func (ca Controller) CreateCase(c *gin.Context) {
 
 	// TODO: Check if the User's case is already present in the DB
 
-	// Convert the request body to newCase Model
+	// Check DB for unassigned Officer
+	officers, err := ca.M.GetUnassignedOfficers()
 
+	var officer models.Officer
+	var assigned bool
+
+	if err != nil {
+		officer = models.Officer{}
+		assigned = false
+	}
+
+	officer = officers[0]
+	assigned = true
+
+	// Change officer status to assigned
+	err = ca.M.MakeOfficerAssigned(officer.ID)
+
+	if err != nil {
+		officer = models.Officer{}
+		assigned = false
+	}
+
+	// Convert the request body to newCase Model
 	newCase := models.Case{
 		UserInfo: models.UserInfo{
 			Name:  req.User.Name,
@@ -52,10 +73,9 @@ func (ca Controller) CreateCase(c *gin.Context) {
 			RegNo: req.Car.RegNo,
 		},
 		Active:   true,
-		Assigned: false,
+		Assigned: assigned,
+		Officer:  officer.ID,
 	}
-
-	// TODO: Assign a Free Officer to the case
 
 	insertedId, err := ca.M.CreateNewCase(newCase)
 
@@ -68,9 +88,11 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":    http.StatusOK,
-		"message": "Successfully Added Case to DB",
-		"id":      insertedId,
+		"code":     http.StatusOK,
+		"message":  "Successfully Added Case to DB",
+		"id":       insertedId,
+		"officer":  officer,
+		"assigned": assigned,
 	})
 
 	return

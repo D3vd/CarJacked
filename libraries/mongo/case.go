@@ -2,6 +2,7 @@ package mongo
 
 import (
 	"context"
+	"errors"
 	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -10,8 +11,37 @@ import (
 	"github.com/R3l3ntl3ss/CarJacked/models"
 )
 
+// UpdateCaseWithOfficerID : Update An unassigned case with new officer
+func (m Mongo) UpdateCaseWithOfficerID(caseID primitive.ObjectID, officerID primitive.ObjectID) error {
+
+	// Filter for case
+	filter := bson.M{
+		"_id" : caseID,
+	}
+
+	// Update the officer ID and change assigned
+	update := bson.D{
+		{"$set", bson.D{
+			{"officer", officerID},
+			{"assigned", true},
+		}},
+	}
+
+	updateResult, err := m.DB.Collection("user").UpdateOne(context.Background(), filter, update)
+
+	if err != nil {
+		return err
+	}
+
+	if updateResult.ModifiedCount == 0 {
+		return errors.New("no document was updated")
+	}
+
+	return nil
+}
+
 // GetAllUnassignedCases : Get all active cases
-func (m Mongo) GetAllUnassignedCases() (cases []primitive.M ,err error) {
+func (m Mongo) GetAllUnassignedCases() (cases []models.Case ,err error) {
 
 	cur, err := m.DB.Collection("case").Find(context.Background(), bson.M{"assigned": false})
 
@@ -26,7 +56,7 @@ func (m Mongo) GetAllUnassignedCases() (cases []primitive.M ,err error) {
 }
 
 // GetAllActiveCases : Get all active cases
-func (m Mongo) GetAllActiveCases() (cases []primitive.M ,err error) {
+func (m Mongo) GetAllActiveCases() (cases []models.Case ,err error) {
 
 	cur, err := m.DB.Collection("case").Find(context.Background(), bson.M{"active": true})
 

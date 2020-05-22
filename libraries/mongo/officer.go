@@ -2,11 +2,42 @@ package mongo
 
 import (
 	"context"
+	"errors"
 	"github.com/R3l3ntl3ss/CarJacked/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
 )
+
+// MakeOfficerAssigned : Change Officer to assigned
+func (m Mongo) MakeOfficerAssigned(officerID primitive.ObjectID) error {
+
+	//	Filter officer by ID
+	filter := bson.M{
+		"_id": officerID,
+	}
+
+	//	Update Assigned Status
+	update := bson.D{
+		{"$set", bson.D{
+			{"assigned", true},
+		}},
+	}
+
+	updateResult, err := m.DB.Collection("officer").UpdateOne(context.Background(), filter, update)
+
+	log.Println(updateResult, err)
+
+	if err != nil {
+		return err
+	}
+
+	if updateResult.ModifiedCount == 0 {
+		return errors.New("no document was updated")
+	}
+
+	return nil
+}
 
 // GetUnassignedOfficer : Get a list of unassigned officer
 func (m Mongo) GetUnassignedOfficers() ([]models.Officer, error) {
@@ -25,6 +56,10 @@ func (m Mongo) GetUnassignedOfficers() ([]models.Officer, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	if len(officers) == 0 {
+		return nil, errors.New("no officers found")
 	}
 
 	return officers, nil

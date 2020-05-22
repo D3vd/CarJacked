@@ -1,1 +1,3 @@
-module.exports = {};
+module.exports = {
+  plugins: ["gatsby-plugin-sass", "gatsby-plugin-react-helmet"],
+};

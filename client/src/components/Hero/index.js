@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "gatsby";
 
 import styles from "./hero.module.scss";
+import { Row, Col } from "antd";
 
 function Hero() {
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
+    <Row className={styles.container}>
+      <Col lg={12} md={24} className={styles.content}>
         <h1>We can help you recover your missing vehicle</h1>
         <h3>
           File a missing car report now and have direct access to the officer
@@ -16,11 +17,11 @@ function Hero() {
         <Link to="/report" className={styles.link}>
           Create a Report &rarr;
         </Link>
-      </div>
-      <div className={styles.image}>
+      </Col>
+      <Col lg={12} md={24} className={styles.image}>
         <img src={require("../../images/hero.png")} alt="Hero.jpg" />
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 }
 

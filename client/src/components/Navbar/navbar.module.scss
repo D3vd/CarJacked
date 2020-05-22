@@ -5,27 +5,44 @@
   position: absolute;
   top: 0;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 }
 
 .links {
   .link {
-    line-height: 5rem;
+    margin-top: 1rem !important;
     margin: 0 2rem;
     font-size: 1.1rem;
     color: #111;
     font-weight: 500;
     padding: 0.5rem 2rem;
     border-radius: 2rem;
+    text-decoration: none;
+    float: right;
   }
 
   .login {
     background-color: #111;
     color: white;
   }
+
+  @media (max-width: 768px) {
+    .link {
+      padding: 0.2rem 1rem;
+      font-size: 1rem;
+      margin: 0 0.5rem;
+      float: left;
+    }
+  }
 }
 
 .logo {
   display: flex;
+  text-decoration: none;
+  color: #111;
 
   img {
     width: 5rem;
@@ -37,5 +54,18 @@
     line-height: 5rem;
     font-size: 2rem;
     font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    img {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 1.5rem;
+    }
+
+    h1 {
+      line-height: 4rem;
+      font-size: 1.5rem;
+    }
   }
 }

@@ -1,12 +1,12 @@
 package server
 
 import (
-	"../controllers/admin"
-	"../controllers/auth"
-	"../controllers/casecnt"
+	"github.com/R3l3ntl3ss/CarJacked/controllers/admin"
+	"github.com/R3l3ntl3ss/CarJacked/controllers/auth"
+	"github.com/R3l3ntl3ss/CarJacked/controllers/casecnt"
 
-	"../libraries/mongo"
-	"../middleware"
+	"github.com/R3l3ntl3ss/CarJacked/libraries/mongo"
+	"github.com/R3l3ntl3ss/CarJacked/middleware"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/sessions"

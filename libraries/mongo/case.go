@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
-	"../../models"
+	"github.com/R3l3ntl3ss/CarJacked/models"
 )
 
 // GetAllUnassignedCases : Get all active cases

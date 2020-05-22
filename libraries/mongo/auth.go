@@ -1,7 +1,7 @@
 package mongo
 
 import (
-	"../../models"
+	"github.com/R3l3ntl3ss/CarJacked/models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

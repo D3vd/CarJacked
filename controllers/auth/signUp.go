@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"../../models"
-	"../../models/requests"
+	"github.com/R3l3ntl3ss/CarJacked/models"
+	"github.com/R3l3ntl3ss/CarJacked/models/requests"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

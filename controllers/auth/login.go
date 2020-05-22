@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"../../models/requests"
+	"github.com/R3l3ntl3ss/CarJacked/models/requests"
 )
 
 // Login : Authenticate user using username and password

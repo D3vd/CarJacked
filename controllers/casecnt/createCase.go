@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"../../models"
-	"../../models/requests"
+	"github.com/R3l3ntl3ss/CarJacked/models"
+	"github.com/R3l3ntl3ss/CarJacked/models/requests"
 )
 
 // CreateCase : Create a new case and store to DB

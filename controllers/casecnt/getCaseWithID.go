@@ -5,7 +5,7 @@ import (
 
 	"net/http"
 
-	"../../models"
+	"github.com/R3l3ntl3ss/CarJacked/models"
 )
 
 // GetCaseWithID : Get One case filtered by ID

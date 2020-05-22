@@ -15,10 +15,10 @@ function Navbar() {
       </Col>
       <Col lg={12} xs={24}>
         <div className={styles.links}>
-          <Link className={styles.link + " " + styles.login} to="/login">
+          <Link className={styles.link + " " + styles.login} to="/login/">
             Officer Login
           </Link>
-          <Link className={styles.link + " " + styles.report} to="/report">
+          <Link className={styles.link + " " + styles.report} to="/report/">
             File a Report
           </Link>
         </div>

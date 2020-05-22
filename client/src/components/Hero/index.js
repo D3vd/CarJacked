@@ -14,7 +14,7 @@ function Hero() {
           working on the case until your car has been recovered. Keep track and
           get updates about your case by email.
         </h3>
-        <Link to="/report" className={styles.link}>
+        <Link to="/report/" className={styles.link}>
           Create a Report &rarr;
         </Link>
       </Col>

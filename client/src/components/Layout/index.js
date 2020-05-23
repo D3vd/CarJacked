@@ -14,8 +14,8 @@ const Layout = ({ children }) => {
     axios.get("http://localhost:8080/ping").then((res) => {
       console.log(res.data);
     });
-    console.log(localStorage.getItem("userID"));
-    if (localStorage.getItem !== null) navigate("/dashboard");
+    let token = localStorage.getItem("token");
+    if (token !== null) navigate("/dashboard");
   }, []);
 
   return (

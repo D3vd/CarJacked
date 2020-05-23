@@ -4,7 +4,6 @@ import { navigate } from "gatsby";
 
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import Error from "./Error";
 
 import styles from "./login.module.scss";
 
@@ -22,7 +21,7 @@ function Login() {
       })
       .then((res) => {
         if (res.data.code === 200) {
-          localStorage.setItem("userID", res.data.userID);
+          localStorage.setItem("token", res.data.token);
           navigate("/dashboard");
         } else {
           console.log(res);
@@ -45,8 +44,7 @@ function Login() {
       })
       .then((res) => {
         if (res.data.code === 200) {
-          localStorage.setItem("userID", res.data.userID);
-          navigate("/dashboard");
+          navigate("/login");
         } else if (res.data.code === 400) {
           setUsernameExists(true);
         } else {
@@ -62,16 +60,18 @@ function Login() {
 
   return (
     <div className={styles.container}>
-      {error ? (
-        <Error />
-      ) : signupPage ? (
+      {signupPage ? (
         <SignUpForm
           onSubmit={signUpSubmit}
           setSignupPage={setSignupPage}
           usernameExists={usernameExists}
         />
       ) : (
-        <LoginForm onSubmit={loginFormSubmit} setSignupPage={setSignupPage} />
+        <LoginForm
+          onSubmit={loginFormSubmit}
+          setSignupPage={setSignupPage}
+          error={error}
+        />
       )}
     </div>
   );

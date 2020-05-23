@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
+import { navigate } from "gatsby";
 
 const { Header, Content } = Layout;
 
 import styles from "./dashboard.module.scss";
 
 function Dashboard() {
+  let [token, setToken] = useState("");
+
+  // Validate if the toke is set
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (token == null) navigate("/");
+    setToken(token);
+    console.log(token);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Layout className={styles.layout}>

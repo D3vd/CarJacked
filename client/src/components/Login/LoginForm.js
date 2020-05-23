@@ -1,13 +1,24 @@
 import React from "react";
-import { Form, Input, Button, Checkbox, Popconfirm } from "antd";
+import { Form, Input, Button, Checkbox, Popconfirm, Alert } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import styles from "./login.module.scss";
 
-const LoginForm = ({ onSubmit, setSignupPage }) => {
+const LoginForm = ({ onSubmit, setSignupPage, error }) => {
   return (
     <div className={styles.login}>
       <h1>Officer Login</h1>
+
+      {error ? (
+        <Alert
+          message="Wrong Credentials"
+          description="The Username and Password combo does not match. Please verify and try again"
+          type="error"
+          style={{ marginBottom: "2rem" }}
+        />
+      ) : (
+        ""
+      )}
 
       <Form
         name="normal_login"

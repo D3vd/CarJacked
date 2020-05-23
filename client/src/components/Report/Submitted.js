@@ -8,8 +8,10 @@ function Submitted({ caseID, data }) {
     <div className={styles.submitted}>
       <h1>Your report has been successfully Submitted!</h1>
       <h2>
-        An email with Information about your Case has been sent your Email ID.
-        Please check it for more information.
+        Keep track of this url to be up to date with the case. <br />
+        <a
+          href={`https://carjackked.now.sh/case/${caseID}`}
+        >{`https://carjackked.now.sh/case/${caseID}`}</a>
       </h2>
       <h3>Your Case ID is {caseID}</h3>
       {data.assigned ? (

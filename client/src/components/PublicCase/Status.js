@@ -14,7 +14,7 @@ function Status({ status }) {
       ) : (
         <Alert
           message="Your case was solved"
-          description="Your Case was successfully solved. Check your email for more information"
+          description="Your Case was successfully solved. Please contact your officer to get more details"
           type="success"
           style={{ marginBottom: "2rem" }}
         ></Alert>

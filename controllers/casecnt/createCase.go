@@ -48,10 +48,10 @@ func (ca Controller) CreateCase(c *gin.Context) {
 	if err != nil {
 		officer = models.Officer{}
 		assigned = false
+	} else {
+		officer = officers[0]
+		assigned = true
 	}
-
-	officer = officers[0]
-	assigned = true
 
 	// Change officer status to assigned
 	err = ca.M.MakeOfficerAssigned(officer.ID)

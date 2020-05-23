@@ -4,6 +4,8 @@ import (
 	"github.com/R3l3ntl3ss/CarJacked/models"
 	"github.com/R3l3ntl3ss/CarJacked/models/requests"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"log"
 	"net/http"
 )
 
@@ -52,10 +54,41 @@ func (a Controller) SignUp(c *gin.Context) {
 		}
 	}
 
+	// Map Officer to Free Case
+	// Check DB for unassigned cases
+	cases, ok := a.M.GetAllUnassignedCases()
+
+	log.Println(cases)
+
+	var unassignedCase models.Case
+	var assigned bool
+
+	if ok != nil {
+		unassignedCase = models.Case{}
+		assigned = false
+	} else {
+		unassignedCase = cases[0]
+		assigned = true
+	}
+
+	// Create new officer ID
+	officerID := primitive.NewObjectID()
+
+	log.Println(officerID)
+
+	ok = a.M.UpdateCaseWithOfficerID(unassignedCase.ID, officerID)
+
+	if ok != nil {
+		log.Println(ok)
+		unassignedCase = models.Case{}
+		assigned = false
+	}
+
 	// Create new Officer Model
 	officer := models.Officer{
+		ID:       officerID,
 		Name:     req.Name,
-		Assigned: false,
+		Assigned: assigned,
 	}
 
 	if ok := a.M.CreateOfficer(officer, userID); ok != nil {

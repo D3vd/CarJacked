@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+// DEPRECATED : This function uses logs out the user for Session based Authentication
+//              But now the auth method is changed to JWT
 // Logout : Logout the user by removing the userID from session
 func (a Controller) Logout(c *gin.Context) {
 	session := sessions.Default(c)

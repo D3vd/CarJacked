@@ -1,17 +1,24 @@
 package auth
 
 import (
-	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 	"strings"
+	"time"
 
 	"github.com/R3l3ntl3ss/CarJacked/models/requests"
+
+	jwtLib "github.com/dgrijalva/jwt-go"
 )
 
 // Login : Authenticate user using username and password
 func (a Controller) Login(c *gin.Context) {
-	session := sessions.Default(c)
+
+	secret := os.Getenv("SECRET")
+
+	// Create the token
+	token := jwtLib.New(jwtLib.GetSigningMethod("HS256"))
 
 	// Create Empty Request body
 	var req requests.Login
@@ -27,17 +34,6 @@ func (a Controller) Login(c *gin.Context) {
 
 	username := req.Username
 	password := req.Password
-
-	// Check if the user is already logged in
-	sessionID := session.Get("userID")
-
-	if sessionID != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"code":    http.StatusBadRequest,
-			"message": "User is already logged in",
-		})
-		return
-	}
 
 	// Validate form input
 	if strings.Trim(username, " ") == "" || strings.Trim(password, " ") == "" {
@@ -77,19 +73,25 @@ func (a Controller) Login(c *gin.Context) {
 		return
 	}
 
-	// Get userID and set it for session
-	session.Set("userID", userID)
-	if err := session.Save(); err != nil {
+	// Set some claims
+	token.Claims = jwtLib.MapClaims{
+		"userID": userID,
+		"exp":    time.Now().Add(time.Hour * 2).Unix(),
+	}
+
+	// Sign and get the complete encoded token as a string
+	tokenString, ok := token.SignedString([]byte(secret))
+
+	if ok != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"code":    http.StatusInternalServerError,
-			"message": "Failed to save session",
+			"message": "Could not generate token",
 		})
-		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"code":    http.StatusOK,
 		"message": "Successfully authenticated user",
-		"userID": userID,
+		"token":   tokenString,
 	})
 }

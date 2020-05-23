@@ -27,8 +27,8 @@ func (m Mongo) UpdateCaseWithOfficerID(caseID primitive.ObjectID, officerID prim
 		}},
 	}
 
-	updateResult, err := m.DB.Collection("user").UpdateOne(context.Background(), filter, update)
-
+	updateResult, err := m.DB.Collection("case").UpdateOne(context.Background(), filter, update)
+	
 	if err != nil {
 		return err
 	}
@@ -51,6 +51,14 @@ func (m Mongo) GetAllUnassignedCases() (cases []models.Case ,err error) {
 	}
 
 	cases, err = CaseCursor(cur)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if len(cases) == 0 {
+		return nil, errors.New("no unassigned cases were found")
+	}
 
 	return cases,nil
 }

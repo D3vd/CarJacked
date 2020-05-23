@@ -27,7 +27,6 @@ function Dashboard() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setActiveCase(res.data.case);
       })
       .catch((err) => {
@@ -36,12 +35,29 @@ function Dashboard() {
       });
   }, []);
 
+  const handleSolveCase = () => {
+    axios
+      .get("http://localhost:8080/admin/solveCase", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setActiveCase(null);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      });
+  };
+
   return (
     <div className={styles.container}>
       <Header />
       {!error ? (
         activeCase ? (
-          <Case activeCase={activeCase} />
+          <Case activeCase={activeCase} solveCase={handleSolveCase} />
         ) : (
           <NoCase />
         )

@@ -9,6 +9,43 @@ import (
 	"log"
 )
 
+// MakeOfficerUnassigned : Change Office to unassigned
+func (m Mongo) MakeOfficerUnassigned(officerID string) error {
+
+	// Convert case ID string to primitive Object
+	officerObjID, err := primitive.ObjectIDFromHex(officerID)
+
+	if err != nil {
+		return err
+	}
+
+	// Filter for case
+	filter := bson.M{
+		"_id": officerObjID,
+	}
+
+	// Update the officer ID and change assigned
+	update := bson.D{
+		{"$set", bson.D{
+			{"assigned", false},
+		}},
+	}
+
+	updateResult, err := m.DB.Collection("officer").UpdateOne(context.Background(), filter, update)
+
+	log.Println(updateResult, err)
+
+	if err != nil {
+		return err
+	}
+
+	if updateResult.ModifiedCount == 0 {
+		return errors.New("no document was updated")
+	}
+
+	return nil
+}
+
 // MakeOfficerAssigned : Change Officer to assigned
 func (m Mongo) MakeOfficerAssigned(officerID primitive.ObjectID) error {
 

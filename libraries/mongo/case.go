@@ -11,6 +11,42 @@ import (
 	"github.com/R3l3ntl3ss/CarJacked/models"
 )
 
+// MakeCaseNotActive : Make case as not active
+func (m Mongo) MakeCaseNotActive(officerID string) error {
+
+	// Convert case ID string to primitive Object
+	officerObjID, err := primitive.ObjectIDFromHex(officerID)
+
+	if err != nil {
+		return err
+	}
+
+	// Filter for case
+	filter := bson.M{
+		"officer": officerObjID,
+		"active": true,
+	}
+
+	// Update the officer ID and change assigned
+	update := bson.D{
+		{"$set", bson.D{
+			{"active", false},
+		}},
+	}
+
+	updateResult, err := m.DB.Collection("case").UpdateOne(context.Background(), filter, update)
+
+	if err != nil {
+		return err
+	}
+
+	if updateResult.ModifiedCount == 0 {
+		return errors.New("no document was updated")
+	}
+
+	return nil
+}
+
 // GetCaseByOfficerID : Get a case by ID
 func (m Mongo) GetCaseByOfficerID(id string, caseDoc *models.Case) (error int) {
 	// Convert case ID string to primitive Object
@@ -23,6 +59,7 @@ func (m Mongo) GetCaseByOfficerID(id string, caseDoc *models.Case) (error int) {
 	// Create filter for search
 	filter := bson.M{
 		"officer": officerObjID,
+		"active": true,
 	}
 
 	//	Query DB for case

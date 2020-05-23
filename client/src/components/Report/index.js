@@ -24,6 +24,7 @@ const Report = () => {
 
   const handleUploadSuccess = (filename) => {
     setCarImage(filename);
+    setUploadError(false);
 
     firebase
       .storage()
@@ -48,7 +49,10 @@ const Report = () => {
           color: values.color,
           regNo: values.regNo,
           model: values.model,
+          lastSeen: values.lastSeenDate.format("YYYY-MM-DD"),
+          location: values.location,
           image: carImage,
+          description: values.description,
         },
       })
       .then((res) => {
@@ -85,6 +89,7 @@ const Report = () => {
             error={error}
             handleUploadError={handleUploadError}
             handleUploadSuccess={handleUploadSuccess}
+            uploadError={uploadError}
           />
         </>
       )}

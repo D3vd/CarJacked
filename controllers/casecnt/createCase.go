@@ -29,7 +29,11 @@ func (ca Controller) CreateCase(c *gin.Context) {
 		req.User.Email == "" ||
 		req.User.Phone == "" ||
 		req.Car.Color == "" ||
-		req.Car.RegNo == "" {
+		req.Car.RegNo == "" ||
+		req.Car.Model == "" ||
+		req.Car.LastSeen == "" ||
+		req.Car.Location == "" ||
+		req.Car.Description == ""{
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code":    http.StatusBadRequest,
 			"message": "Please ensure that all the fields are filled",
@@ -71,6 +75,11 @@ func (ca Controller) CreateCase(c *gin.Context) {
 		Car: models.Car{
 			Color: req.Car.Color,
 			RegNo: req.Car.RegNo,
+			Model: req.Car.Model,
+			LastSeen: req.Car.LastSeen,
+			Location: req.Car.Location,
+			Image: req.Car.Image,
+			Description: req.Car.Description,
 		},
 		Active:   true,
 		Assigned: assigned,

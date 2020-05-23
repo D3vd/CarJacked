@@ -23,14 +23,11 @@ type UserInfo struct {
 
 // Car : Details of the missing Car
 type Car struct {
-	Color string `json:"color"`
-	RegNo string `json:"regNo"`
-	// LastSeen time.Time `json:"lastSeen"`
-	// Location Location `json:"location"`
-}
-
-// Location : Last known location of the missing Car
-type Location struct {
-	Lat float64 `json:"lat,omitempty"`
-	Lng float64 `json:"lng,omitempty"`
+	Color       string `json:"color"`
+	RegNo       string `json:"regNo"`
+	Model       string `json:"model"`
+	LastSeen    string `json:"lastSeen"`
+	Location    string `json:"location"`
+	Image       string `json:"image"`
+	Description string `json:"description"`
 }

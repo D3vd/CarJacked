@@ -8,12 +8,15 @@ import firebaseConfig from "../../firebase/config";
 
 import styles from "./report.module.scss";
 
+const { TextArea } = Input;
+
 function UserForm({
   onFinish,
   onFinishFailed,
   error,
   handleUploadError,
   handleUploadSuccess,
+  uploadError,
 }) {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -132,14 +135,51 @@ function UserForm({
           <DatePicker />
         </Form.Item>
 
-        <FileUploader
-          accept="image/*"
-          name="carImage"
-          randomizeFilename
-          storageRef={firebase.storage().ref("carImage")}
-          onUploadError={handleUploadError}
-          onUploadSuccess={handleUploadSuccess}
-        />
+        <Form.Item
+          label="Last Known Location"
+          name="location"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Last Known Location!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="Upload Car Image">
+          {uploadError ? (
+            <Alert
+              message="Error While Uploading Image"
+              description="Encountered an error while Uploading Image. Please try again"
+              type="error"
+            />
+          ) : (
+            ""
+          )}
+          <FileUploader
+            accept="image/*"
+            name="carImage"
+            randomizeFilename
+            storageRef={firebase.storage().ref("carImage")}
+            onUploadError={handleUploadError}
+            onUploadSuccess={handleUploadSuccess}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Description / Tips"
+          name="description"
+          rules={[
+            {
+              required: true,
+              message: "Please input some Description!",
+            },
+          ]}
+        >
+          <TextArea />
+        </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">

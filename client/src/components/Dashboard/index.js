@@ -43,8 +43,8 @@ function Dashboard() {
         },
       })
       .then((res) => {
-        console.log(res);
-        setActiveCase(null);
+        console.log(res.data);
+        setActiveCase(res.data.case);
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +60,6 @@ function Dashboard() {
         },
       })
       .then((res) => {
-        console.log(res);
         setActiveCase(res.data.case);
       })
       .catch((err) => {

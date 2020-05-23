@@ -40,7 +40,7 @@ function Dashboard() {
     <div className={styles.container}>
       <Header />
       {!error ? (
-        !activeCase ? (
+        activeCase ? (
           <Case activeCase={activeCase} />
         ) : (
           <NoCase />

@@ -24,10 +24,19 @@ func (a Controller) GetCase(c *gin.Context) {
 	errCode := a.M.GetCaseByOfficerID(userID, &assignedCase)
 
 	if errCode != 0 {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"code": http.StatusInternalServerError,
-			"message": "Internal Server Error while getting case. PLease try again",
-		})
+		if errCode == 400 {
+			c.JSON(http.StatusOK, gin.H{
+				"code": http.StatusOK,
+				"case": nil,
+			})
+			return
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"code":    http.StatusInternalServerError,
+				"message": "Internal Server Error while getting case. PLease try again",
+			})
+			return
+		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{

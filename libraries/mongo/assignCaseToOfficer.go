@@ -35,26 +35,33 @@ func (m Mongo) AssignCaseToOfficer(caseID primitive.ObjectID) (assigned bool, of
 }
 
 // AssignOfficerToCase : Assign case to unassigned officer
-func (m Mongo) AssignOfficerToCase(officerID primitive.ObjectID) ( bool,  models.Case,  error) {
+func (m Mongo) AssignOfficerToCase(officerID string) ( bool,  models.Case,  error) {
+
+	// Convert case ID string to primitive Object
+	officerObjID, err := primitive.ObjectIDFromHex(officerID)
+
+	if err != nil {
+		return false, models.Case{}, err
+	}
 
 	cases, err := m.GetAllUnassignedCases()
 
 	// Check for Error And No Assigned Officers
 	if err != nil {
-		return false, models.Case{}, err
+		return false, models.Case{}, nil
 	} else if (len(cases)) == 0 {
 		return false, models.Case{}, nil
 	}
 
 	oneCase := cases[0]
 
-	err = m.UpdateCaseWithOfficerID(oneCase.ID, officerID)
+	err = m.UpdateCaseWithOfficerID(oneCase.ID, officerObjID)
 
 	if err != nil {
 		return false, models.Case{}, err
 	}
 
-	err = m.MakeOfficerAssigned(officerID)
+	err = m.MakeOfficerAssigned(officerObjID)
 
 	if err != nil {
 		return false, models.Case{}, err

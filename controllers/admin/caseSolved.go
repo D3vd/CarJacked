@@ -27,7 +27,7 @@ func (a Controller) CaseSolved(c *gin.Context) {
 		})
 		return
 	}
-	
+
 	// Mark Officer as unassigned
 	err = a.M.MakeOfficerUnassigned(userID)
 

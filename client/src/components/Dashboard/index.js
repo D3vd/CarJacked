@@ -52,6 +52,23 @@ function Dashboard() {
       });
   };
 
+  const checkForNewCase = () => {
+    axios
+      .get("http://localhost:8080/admin/checkForNewCase", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setActiveCase(res.data.case);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      });
+  };
+
   return (
     <div className={styles.container}>
       <Header />
@@ -59,7 +76,7 @@ function Dashboard() {
         activeCase ? (
           <Case activeCase={activeCase} solveCase={handleSolveCase} />
         ) : (
-          <NoCase />
+          <NoCase checkForNewCase={checkForNewCase} />
         )
       ) : (
         <Error />

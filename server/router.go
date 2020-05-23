@@ -4,10 +4,10 @@ import (
 	"github.com/R3l3ntl3ss/CarJacked/controllers/admin"
 	"github.com/R3l3ntl3ss/CarJacked/controllers/auth"
 	"github.com/R3l3ntl3ss/CarJacked/controllers/casecnt"
+	"github.com/gin-gonic/contrib/jwt"
+	"os"
 
 	"github.com/R3l3ntl3ss/CarJacked/libraries/mongo"
-	"github.com/R3l3ntl3ss/CarJacked/middleware"
-
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -25,6 +25,9 @@ func NewRouter() *gin.Engine {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(cors.Default())
+
+	// Get JWT Auth Secret
+	secret := os.Getenv("SECRET")
 
 	// Initialize MongoDB server
 	m := &mongo.Mongo{}
@@ -44,7 +47,7 @@ func NewRouter() *gin.Engine {
 
 	// Routes for admin operations [Requires Authentication]
 	adminRouter := router.Group("/admin")
-	adminRouter.Use(middleware.AuthRequired)
+	adminRouter.Use(jwt.Auth(secret))
 	{
 		a := admin.Controller{
 			M: m,

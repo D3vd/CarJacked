@@ -36,7 +36,7 @@ func (m Mongo) CreateNewUser(username string, password string, officerID primiti
 
 	// Insert new user into DB
 	insertResult, err := m.DB.Collection("user").InsertOne(context.Background(), newUser)
-	
+
 	if err != nil {
 		return "", 500
 	}

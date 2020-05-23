@@ -11,6 +11,33 @@ import (
 	"github.com/R3l3ntl3ss/CarJacked/models"
 )
 
+// GetCaseByOfficerID : Get a case by ID
+func (m Mongo) GetCaseByOfficerID(id string, caseDoc *models.Case) (error int) {
+	// Convert case ID string to primitive Object
+	officerObjID, err := primitive.ObjectIDFromHex(id)
+
+	if err != nil {
+		return 400
+	}
+
+	// Create filter for search
+	filter := bson.M{
+		"officer": officerObjID,
+	}
+
+	//	Query DB for case
+	err = m.DB.Collection("case").FindOne(context.TODO(), filter).Decode(&caseDoc)
+
+	if err != nil {
+		if err.Error() == "mongo: no documents in result" {
+			return 400
+		}
+		return 500
+	}
+
+	return 0
+}
+
 // UpdateCaseWithOfficerID : Update An unassigned case with new officer
 func (m Mongo) UpdateCaseWithOfficerID(caseID primitive.ObjectID, officerID primitive.ObjectID) error {
 

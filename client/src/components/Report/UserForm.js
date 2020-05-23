@@ -1,27 +1,11 @@
 import React from "react";
 import { Form, Input, DatePicker, Button, Alert } from "antd";
-import FileUploader from "react-firebase-file-uploader";
-import firebase from "firebase/app";
-import "firebase/storage";
-
-import firebaseConfig from "../../firebase/config";
 
 import styles from "./report.module.scss";
 
 const { TextArea } = Input;
 
-function UserForm({
-  onFinish,
-  onFinishFailed,
-  error,
-  handleUploadError,
-  handleUploadSuccess,
-  uploadError,
-}) {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-    console.log(firebaseConfig);
-  }
+function UserForm({ onFinish, onFinishFailed, error }) {
   return (
     <div>
       <Form
@@ -146,26 +130,6 @@ function UserForm({
           ]}
         >
           <Input />
-        </Form.Item>
-
-        <Form.Item label="Upload Car Image">
-          {uploadError ? (
-            <Alert
-              message="Error While Uploading Image"
-              description="Encountered an error while Uploading Image. Please try again"
-              type="error"
-            />
-          ) : (
-            ""
-          )}
-          <FileUploader
-            accept="image/*"
-            name="carImage"
-            randomizeFilename
-            storageRef={firebase.storage().ref("carImage")}
-            onUploadError={handleUploadError}
-            onUploadSuccess={handleUploadSuccess}
-          />
         </Form.Item>
 
         <Form.Item

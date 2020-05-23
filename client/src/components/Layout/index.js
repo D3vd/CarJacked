@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { navigate } from "gatsby";
-import firebase from "firebase/app";
-
-import firebaseConfig from "../../firebase/config";
 
 import "antd/dist/antd.css";
 import "./global.scss";
@@ -19,11 +16,6 @@ const Layout = ({ children }) => {
     });
     let token = localStorage.getItem("token");
     if (token !== null) navigate("/dashboard");
-
-    // Initialize Firebase App
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
   }, []);
 
   return (

@@ -46,9 +46,11 @@ func NewRouter() *gin.Engine {
 	{
 		a := admin.Controller{
 			M: m,
+			Secret: secret,
 		}
 
 		adminRouter.GET("/test", a.Test)
+		adminRouter.GET("/getCase", a.GetCase)
 	}
 
 	// Routes for creating and seeing cases [Public]

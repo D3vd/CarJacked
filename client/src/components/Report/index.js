@@ -12,6 +12,7 @@ const Report = () => {
   let [submitted, setSubmitted] = useState(false);
   let [error, setError] = useState(false);
   let [caseID, setCaseID] = useState("");
+  let [submittedData, setSubmittedData] = useState({});
 
   // Image Upload Functions
   let [carImage, setCarImage] = useState("");
@@ -60,6 +61,7 @@ const Report = () => {
           setSubmitted(true);
           setError(false);
           setCaseID(res.data.id);
+          setSubmittedData(res.data);
         } else {
           console.log(res);
           setError(true);
@@ -78,7 +80,7 @@ const Report = () => {
   return (
     <div className={styles.container}>
       {submitted ? (
-        <Submitted caseID={caseID} />
+        <Submitted caseID={caseID} data={submittedData} />
       ) : (
         <>
           <h1>Fill in the form to create a Report</h1>

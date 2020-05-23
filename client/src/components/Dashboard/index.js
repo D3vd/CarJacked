@@ -14,7 +14,6 @@ function Dashboard() {
     let token = localStorage.getItem("token");
     if (token == null) navigate("/");
     setToken(token);
-    console.log(token);
   }, []);
 
   return (

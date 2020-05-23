@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 import UserForm from "./UserForm";
 import Submitted from "./Submitted";
@@ -10,6 +12,29 @@ const Report = () => {
   let [submitted, setSubmitted] = useState(false);
   let [error, setError] = useState(false);
   let [caseID, setCaseID] = useState("");
+
+  // Image Upload Functions
+  let [carImage, setCarImage] = useState("");
+  let [uploadError, setUploadError] = useState(false);
+
+  const handleUploadError = (error) => {
+    setUploadError(true);
+    console.error(error);
+  };
+
+  const handleUploadSuccess = (filename) => {
+    setCarImage(filename);
+
+    firebase
+      .storage()
+      .ref("carImage")
+      .child(filename)
+      .getDownloadURL()
+      .then((url) => {
+        setCarImage(url);
+        console.log(url);
+      });
+  };
 
   const onFinish = (values) => {
     axios
@@ -23,6 +48,7 @@ const Report = () => {
           color: values.color,
           regNo: values.regNo,
           model: values.model,
+          image: carImage,
         },
       })
       .then((res) => {
@@ -57,6 +83,8 @@ const Report = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             error={error}
+            handleUploadError={handleUploadError}
+            handleUploadSuccess={handleUploadSuccess}
           />
         </>
       )}

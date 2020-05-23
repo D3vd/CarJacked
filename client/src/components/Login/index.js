@@ -41,10 +41,11 @@ function Login() {
         password: values.password,
         name: values.name,
         email: values.email,
+        secret: values.secret,
       })
       .then((res) => {
         if (res.data.code === 200) {
-          navigate("/login");
+          window.location = "/login";
         } else if (res.data.code === 400) {
           setUsernameExists(true);
         } else {

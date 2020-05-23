@@ -55,7 +55,7 @@ function SinUpForm({ onSubmit, setSignupPage, usernameExists }) {
         <Form.Item
           label="Admin Secret"
           name="secret"
-          rules={[{ required: true, message: "Please input your Secret!" }]}
+          rules={[{ required: true, message: "Please input the Secret!" }]}
         >
           <Input.Password />
         </Form.Item>

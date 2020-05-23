@@ -34,6 +34,7 @@ func NewRouter() *gin.Engine {
 	{
 		a := auth.Controller{
 			M: m,
+			Secret: secret,
 		}
 
 		authRouter.POST("/login", a.Login)

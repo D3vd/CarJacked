@@ -23,6 +23,14 @@ func (a Controller) SignUp(c *gin.Context) {
 		return
 	}
 
+	if req.Secret != a.Secret {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"code":    http.StatusUnauthorized,
+			"message": "The entered admin secret is incorrect.",
+		})
+		return
+	}
+
 	//	Validate if all the request body fields are filled
 	if req.Username == "" ||
 		req.Password == "" ||

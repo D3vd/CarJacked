@@ -5,4 +5,5 @@ type SignUp struct {
 	Password string `json:"password"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
+	Secret   string `json:"secret"`
 }

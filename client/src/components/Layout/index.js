@@ -23,7 +23,6 @@ const Layout = ({ children }) => {
     // Initialize Firebase App
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
-      console.log(firebaseConfig);
     }
   }, []);
 

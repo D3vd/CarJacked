@@ -20,7 +20,14 @@ func NewRouter() *gin.Engine {
 	// Add Logging and Recovery Middleware
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
-	router.Use(cors.Default())
+
+	// Create CORS with authorization
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	config.AllowCredentials = true
+	config.AddAllowHeaders("authorization")
+
+	router.Use(cors.New(config))
 
 	// Get JWT Auth Secret
 	secret := os.Getenv("SECRET")

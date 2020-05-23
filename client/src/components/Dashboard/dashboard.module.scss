@@ -1,13 +1,27 @@
 .container {
-  height: 100vh;
+  // height: 100vh;
+}
+
+.noCase {
+  margin: 2rem 1rem;
+  text-align: center;
+
+  h1 {
+    font-weight: 600;
+  }
+
+  img {
+    width: 40rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .header {
   padding: 1.5rem 3rem;
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  top: 0;
   width: 100%;
 
   @media (max-width: 768px) {
@@ -60,5 +74,34 @@
         font-size: 1.5rem;
       }
     }
+  }
+}
+
+.error {
+  text-align: center;
+  margin-top: 10rem;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin: 2rem 0;
+  }
+
+  a {
+    font-size: 1.5rem;
+    color: white;
+    background-color: #111;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+  }
+
+  img {
+    width: 30rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

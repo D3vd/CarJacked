@@ -15,6 +15,11 @@ type User struct {
 
 // Car : Car Information
 type Car struct {
-	Color string `json:"color"`
-	RegNo string `json:"regNo"`
+	Color       string `json:"color"`
+	RegNo       string `json:"regNo"`
+	Model       string `json:"model"`
+	LastSeen    string `json:"lastSeen"`
+	Location    string `json:"location"`
+	Image       string `json:"image"`
+	Description string `json:"description"`
 }

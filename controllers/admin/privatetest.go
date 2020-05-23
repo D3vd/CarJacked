@@ -10,8 +10,6 @@ func (a Controller) Test(c *gin.Context) {
 
 	officers, _ := a.M.GetUnassignedOfficers()
 
-	//a.M.AssignCaseToOfficer("test")
-
 	log.Println(officers)
 
 	c.JSON(http.StatusOK, gin.H{

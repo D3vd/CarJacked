@@ -9,7 +9,6 @@ import (
 
 	"github.com/R3l3ntl3ss/CarJacked/libraries/mongo"
 	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,9 +16,6 @@ import (
 func NewRouter() *gin.Engine {
 
 	router := gin.New()
-
-	// Add Sessions Middleware
-	router.Use(sessions.Sessions("mySession", sessions.NewCookieStore([]byte("secret"))))
 
 	// Add Logging and Recovery Middleware
 	router.Use(gin.Logger())
@@ -41,7 +37,6 @@ func NewRouter() *gin.Engine {
 		}
 
 		authRouter.POST("/login", a.Login)
-		authRouter.GET("/logout", a.Logout)
 		authRouter.POST("/signUp", a.SignUp)
 	}
 

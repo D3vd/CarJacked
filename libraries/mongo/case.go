@@ -16,7 +16,7 @@ func (m Mongo) UpdateCaseWithOfficerID(caseID primitive.ObjectID, officerID prim
 
 	// Filter for case
 	filter := bson.M{
-		"_id" : caseID,
+		"_id": caseID,
 	}
 
 	// Update the officer ID and change assigned
@@ -28,7 +28,7 @@ func (m Mongo) UpdateCaseWithOfficerID(caseID primitive.ObjectID, officerID prim
 	}
 
 	updateResult, err := m.DB.Collection("case").UpdateOne(context.Background(), filter, update)
-	
+
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,7 @@ func (m Mongo) UpdateCaseWithOfficerID(caseID primitive.ObjectID, officerID prim
 }
 
 // GetAllUnassignedCases : Get all active cases
-func (m Mongo) GetAllUnassignedCases() (cases []models.Case ,err error) {
+func (m Mongo) GetAllUnassignedCases() (cases []models.Case, err error) {
 
 	cur, err := m.DB.Collection("case").Find(context.Background(), bson.M{"assigned": false})
 
@@ -60,11 +60,11 @@ func (m Mongo) GetAllUnassignedCases() (cases []models.Case ,err error) {
 		return nil, errors.New("no unassigned cases were found")
 	}
 
-	return cases,nil
+	return cases, nil
 }
 
 // GetAllActiveCases : Get all active cases
-func (m Mongo) GetAllActiveCases() (cases []models.Case ,err error) {
+func (m Mongo) GetAllActiveCases() (cases []models.Case, err error) {
 
 	cur, err := m.DB.Collection("case").Find(context.Background(), bson.M{"active": true})
 
@@ -75,7 +75,7 @@ func (m Mongo) GetAllActiveCases() (cases []models.Case ,err error) {
 
 	cases, err = CaseCursor(cur)
 
-	return cases,nil
+	return cases, nil
 }
 
 // CreateNewCase : Create New Case
@@ -85,7 +85,7 @@ func (m Mongo) CreateNewCase(newCase models.Case) (id interface{}, err error) {
 	insertResult, err := m.DB.Collection("case").InsertOne(context.Background(), newCase)
 
 	if err != nil || insertResult.InsertedID == nil {
-		return  0, err
+		return 0, err
 	}
 
 	return insertResult.InsertedID, nil

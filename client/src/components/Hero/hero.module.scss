@@ -1,0 +1,56 @@
+.container {
+  padding-top: 12rem;
+  height: 100vh;
+
+  padding-right: calc((100vw - 90rem) / 2);
+  padding-left: calc((100vw - 90rem) / 2);
+
+  display: flex;
+
+  justify-content: space-between;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-flow: column-reverse;
+    height: auto;
+  }
+}
+
+.content {
+  padding: 8rem 1rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
+
+  .link {
+    color: white;
+    background-color: #111;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    padding-bottom: 5rem;
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.image {
+  img {
+    width: 100%;
+  }
+}

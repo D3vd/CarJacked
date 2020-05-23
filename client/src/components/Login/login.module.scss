@@ -1,0 +1,60 @@
+.container {
+  padding-top: 12rem;
+
+  padding-right: calc((100vw - 70rem) / 2);
+  padding-left: calc((100vw - 70rem) / 2);
+}
+
+.signup {
+  max-width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+}
+
+.login {
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+}
+
+.error {
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin: 2rem 0;
+  }
+
+  a {
+    font-size: 1.5rem;
+    color: white;
+    background-color: #111;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+  }
+
+  img {
+    width: 30rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

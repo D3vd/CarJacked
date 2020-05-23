@@ -35,8 +35,11 @@ func (a Controller) SignUp(c *gin.Context) {
 		return
 	}
 
+	// Create new officer ID
+	officerID := primitive.NewObjectID()
+
 	// Create New User for Auth
-	userID, err := a.M.CreateNewUser(req.Username, req.Password)
+	userID, err := a.M.CreateNewUser(req.Username, req.Password, officerID)
 
 	if err != 0 {
 		if err == 400 {
@@ -70,11 +73,6 @@ func (a Controller) SignUp(c *gin.Context) {
 		unassignedCase = cases[0]
 		assigned = true
 	}
-
-	// Create new officer ID
-	officerID := primitive.NewObjectID()
-
-	log.Println(officerID)
 
 	ok = a.M.UpdateCaseWithOfficerID(unassignedCase.ID, officerID)
 

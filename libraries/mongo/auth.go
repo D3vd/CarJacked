@@ -8,15 +8,16 @@ import (
 )
 
 // CreateNewUser : Create a admin user and return the UserID
-func (m Mongo) CreateNewUser(username string, password string) (userID string, error int) {
+func (m Mongo) CreateNewUser(username string, password string, officerID primitive.ObjectID) (userID string, error int) {
 
 	//	Create Auth Model
 	newUser := models.User{
-		Password: password,
-		Username: username,
+		OfficerID: officerID,
+		Password:  password,
+		Username:  username,
 	}
 
-	// Check if the username is already exists
+	// Check if the username already exists
 	var userPresent *models.User
 
 	err := m.DB.Collection("user").FindOne(context.Background(), bson.M{"username": username}).Decode(&userPresent)
@@ -35,7 +36,7 @@ func (m Mongo) CreateNewUser(username string, password string) (userID string, e
 
 	// Insert new user into DB
 	insertResult, err := m.DB.Collection("user").InsertOne(context.Background(), newUser)
-
+	
 	if err != nil {
 		return "", 500
 	}
@@ -64,5 +65,5 @@ func (m Mongo) GetUserPasswordAndID(username string) (password string, id string
 		return "", "", 500
 	}
 
-	return auth.Password, auth.ID.Hex(), 0
+	return auth.Password, auth.OfficerID.Hex(), 0
 }

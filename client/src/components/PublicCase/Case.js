@@ -41,10 +41,6 @@ function Case({ publicCase }) {
             <b>Description:</b> {car.description}
           </h3>
         </Col>
-
-        <Col className={styles.image} lg={12} xs={24}>
-          <img src={car.image} alt="" />
-        </Col>
       </Row>
     </div>
   );

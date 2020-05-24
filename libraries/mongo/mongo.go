@@ -34,10 +34,11 @@ func (m *Mongo) Init() {
 	}
 
 	// Create a new Mongo Client
-	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
+	// Set retry writes to false because mongoDB deployment doesn't support it
+	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI + "?retryWrites=false"))
 
 	if err != nil {
-		log.Fatal("Error while intializing MongoDB server. Make sure the URI is correct..")
+		log.Fatal("Error while initializing MongoDB server. Make sure the URI is correct..")
 	}
 
 	// Connect to MongoDB server with context

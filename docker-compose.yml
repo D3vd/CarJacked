@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  client:
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    image: d3vd/carjacked-client
+    ports:
+      - "8000:8000"
+
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: d3vd/carjacked-server
+    ports:
+      - "8080:8080"
+    links:
+      - DB
+    environment:
+      - SECRET=secret
+      - MONGODB_URI=mongodb://DB:27017/carjack
+
+  DB:
+    image: mongo

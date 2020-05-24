@@ -17,7 +17,7 @@ function Case({ activeCase, solveCase }) {
         </h5>
       </div>
       <Row className={styles.car}>
-        <Col className={styles.details} lg={12} xs={24}>
+        <Col className={styles.details}>
           <h2>Car Details</h2>
           <h3>
             <b>Model:</b> {car.model}
@@ -37,10 +37,6 @@ function Case({ activeCase, solveCase }) {
           <h3>
             <b>Description:</b> {car.description}
           </h3>
-        </Col>
-
-        <Col className={styles.image} lg={12} xs={24}>
-          <img src={car.image} alt="" />
         </Col>
       </Row>
       <Popconfirm

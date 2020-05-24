@@ -11,7 +11,7 @@ function Submitted({ caseID, data }) {
         Keep track of this url to be up to date with the case. <br />
         <a
           href={`https://carjackked.now.sh/case/${caseID}`}
-        >{`https://carjackked.now.sh/case/${caseID}`}</a>
+        >{`https://carjacked.now.sh/case/${caseID}`}</a>
       </h2>
       <h3>Your Case ID is {caseID}</h3>
       {data.assigned ? (

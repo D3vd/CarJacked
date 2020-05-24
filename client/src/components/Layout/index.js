@@ -11,7 +11,7 @@ import Navbar from "../Navbar";
 
 const Layout = ({ children }) => {
   useEffect(() => {
-    axios.get("http://localhost:8080/ping").then((res) => {
+    axios.get("https://carjacked.herokuapp.com/ping").then((res) => {
       console.log(res.data);
     });
     let token = localStorage.getItem("token");

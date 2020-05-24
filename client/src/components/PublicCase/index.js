@@ -13,7 +13,7 @@ function PublicCase({ id }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/case/id/${id}`)
+      .get(`https://carjacked.herokuapp.com/case/id/${id}`)
       .then((res) => {
         setPublicCase(res.data);
       })

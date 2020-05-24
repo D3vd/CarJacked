@@ -14,7 +14,7 @@ const Report = () => {
 
   const onFinish = (values) => {
     axios
-      .post("http://localhost:8080/case", {
+      .post("https://carjacked.herokuapp.com/case", {
         user: {
           name: values.name,
           email: values.email,

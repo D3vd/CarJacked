@@ -1,4 +1,4 @@
-FROM golang:1.13.5
+FROM golang:1.13
 
 WORKDIR /go/src/github.com/R3l3ntl3ss/CarJacked
 

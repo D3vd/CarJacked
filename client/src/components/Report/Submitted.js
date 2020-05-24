@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert } from "antd";
+import { Link } from "gatsby";
 
 import styles from "./report.module.scss";
 
@@ -9,9 +10,9 @@ function Submitted({ caseID, data }) {
       <h1>Your report has been successfully Submitted!</h1>
       <h2>
         Keep track of this url to be up to date with the case. <br />
-        <a
-          href={`https://carjackked.now.sh/case/${caseID}`}
-        >{`https://carjacked.now.sh/case/${caseID}`}</a>
+        <Link
+          to={`/case/${caseID}`}
+        >{`https://carjacked.now.sh/case/${caseID}`}</Link>
       </h2>
       <h3>Your Case ID is {caseID}</h3>
       {data.assigned ? (

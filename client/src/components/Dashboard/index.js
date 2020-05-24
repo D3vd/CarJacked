@@ -21,7 +21,7 @@ function Dashboard() {
     setToken(token);
 
     axios
-      .get("http://localhost:8080/admin/getCase", {
+      .get("https://carjacked.herokuapp.com/admin/getCase", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -37,7 +37,7 @@ function Dashboard() {
 
   const handleSolveCase = () => {
     axios
-      .get("http://localhost:8080/admin/solveCase", {
+      .get("https://carjacked.herokuapp.com/admin/solveCase", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -54,7 +54,7 @@ function Dashboard() {
 
   const checkForNewCase = () => {
     axios
-      .get("http://localhost:8080/admin/checkForNewCase", {
+      .get("https://carjacked.herokuapp.com/admin/checkForNewCase", {
         headers: {
           Authorization: "Bearer " + token,
         },

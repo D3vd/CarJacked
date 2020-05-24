@@ -15,7 +15,7 @@ function Login() {
 
   const loginFormSubmit = (values) => {
     axios
-      .post("http://localhost:8080/auth/login", {
+      .post("https://carjacked.herokuapp.com/auth/login", {
         username: values.username,
         password: values.password,
       })
@@ -36,7 +36,7 @@ function Login() {
 
   const signUpSubmit = (values) => {
     axios
-      .post("http://localhost:8080/auth/signUp", {
+      .post("https://carjacked.herokuapp.com/auth/signUp", {
         username: values.username,
         password: values.password,
         name: values.name,

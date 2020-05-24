@@ -31,7 +31,6 @@ func (a Controller) CaseSolved(c *gin.Context) {
 	}
 
 	// Convert userID string to primitive Object ID
-	// Convert case ID string to primitive Object
 	officerObjID, err := primitive.ObjectIDFromHex(userID)
 
 	if err != nil {

@@ -1,0 +1,473 @@
+{
+	"info": {
+		"_postman_id": "81b03554-fdc1-4c3c-9758-053ca32ff7ac",
+		"name": "Car Jack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cases",
+			"item": [
+				{
+					"name": "Create Case",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"name\": \"Dev Daksan\",\n        \"email\": \"devd@gmail.com\",\n        \"phone\": \"+91 84953 88953\"\n    },\n    \"car\": {\n        \"color\": \"Red\",\n\t\t\"regNo\": \"TN 09 L 4508\",\n\t\t\"model\": \"Honda Civic\",\n\t\t\"lastSeen\": \"2019-06-02\",\n\t\t\"location\": \"Mandaveli\",\n\t\t\"description\": \"A huge dent on the front passenger door\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/case",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"case"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Case",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": {\n        \"name\": \"Dev Daksan\",\n        \"email\": \"devd@gmail.com\",\n        \"phone\": \"+91 84953 88953\"\n    },\n    \"car\": {\n        \"color\": \"Red\",\n\t\t\"regNo\": \"TN 09 L 4508\",\n\t\t\"model\": \"Honda\",\n\t\t\"lastSeen\": \"2019-06-02\",\n\t\t\"location\": \"Mandaveli\",\n\t\t\"description\": \"A huge dent on the front passenger door\"\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/case",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"case"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 May 2020 02:43:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "211"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"assigned\": false,\n    \"code\": 200,\n    \"id\": \"5ec9df4fe20a638c26ae4a9d\",\n    \"message\": \"Successfully Added Case to DB\",\n    \"officer\": {\n        \"_id\": \"000000000000000000000000\",\n        \"userID\": \"000000000000000000000000\",\n        \"name\": \"\",\n        \"assigned\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Case with ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/case/id/5ec9df4fe20a638c26ae4a9d",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"case",
+								"id",
+								"5ec9df4fe20a638c26ae4a9d"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Case with ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/case/id/5ec9df4fe20a638c26ae4a9d",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"case",
+										"id",
+										"5ec9df4fe20a638c26ae4a9d"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 May 2020 02:43:59 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "357"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5ec9df4fe20a638c26ae4a9d\",\n    \"officer\": \"000000000000000000000000\",\n    \"user\": {\n        \"name\": \"Dev Daksan\",\n        \"email\": \"devd@gmail.com\",\n        \"phone\": \"+91 84953 88953\"\n    },\n    \"car\": {\n        \"color\": \"Red\",\n        \"regNo\": \"TN 09 L 4508\",\n        \"model\": \"Honda\",\n        \"lastSeen\": \"2019-06-02\",\n        \"location\": \"Mandaveli\",\n        \"image\": \"\",\n        \"description\": \"A huge dent on the front passenger door\"\n    },\n    \"active\": true,\n    \"assigned\": false\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"will009\",\n\t\"password\": \"william1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"will009\",\n\t\"password\": \"william1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 May 2020 02:50:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "220"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Successfully authenticated user\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyOTU4NTIsInVzZXJJRCI6IjVlYzllMGQ5NzhiNmNlZGM4ZDlkYzY4OCJ9.I8-Lv-H8jni68T0u0M8AiM6tAekDCDk5soaRKvQOekE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"will009\",\n    \"password\": \"william1234\",\n    \"name\": \"William Tracy\",\n    \"email\": \"william.tracy@gmail.com\",\n    \"secret\": \"secret\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/signUp",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signUp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SignUp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"will009\",\n    \"password\": \"william1234\",\n    \"name\": \"William Tracy\",\n    \"email\": \"william.tracy@gmail.com\",\n    \"secret\": \"secret\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/auth/signUp",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"signUp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 May 2020 02:50:01 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"userID\": \"5ec9e0d978b6cedc8d9dc689\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Officer Case",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyOTU4NTIsInVzZXJJRCI6IjVlYzllMGQ5NzhiNmNlZGM4ZDlkYzY4OCJ9.I8-Lv-H8jni68T0u0M8AiM6tAekDCDk5soaRKvQOekE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/admin/getCase",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"getCase"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Officer Case",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/admin/getCase",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"getCase"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 May 2020 02:52:15 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"case\": {\n        \"_id\": \"5ec9df4fe20a638c26ae4a9d\",\n        \"officer\": \"5ec9e0d978b6cedc8d9dc688\",\n        \"user\": {\n            \"name\": \"Dev Daksan\",\n            \"email\": \"devd@gmail.com\",\n            \"phone\": \"+91 84953 88953\"\n        },\n        \"car\": {\n            \"color\": \"Red\",\n            \"regNo\": \"TN 09 L 4508\",\n            \"model\": \"Honda\",\n            \"lastSeen\": \"2019-06-02\",\n            \"location\": \"Mandaveli\",\n            \"image\": \"\",\n            \"description\": \"A huge dent on the front passenger door\"\n        },\n        \"active\": true,\n        \"assigned\": true\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Solve Case",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyOTU4NTIsInVzZXJJRCI6IjVlYzllMGQ5NzhiNmNlZGM4ZDlkYzY4OCJ9.I8-Lv-H8jni68T0u0M8AiM6tAekDCDk5soaRKvQOekE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/admin/solveCase",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"solveCase"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Solve Case",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/admin/solveCase",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"solveCase"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 May 2020 02:55:24 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "415"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"case\": {\n        \"_id\": \"5ec9e21478b6cedc8d9dc68b\",\n        \"officer\": \"000000000000000000000000\",\n        \"user\": {\n            \"name\": \"Dev Daksan\",\n            \"email\": \"devd@gmail.com\",\n            \"phone\": \"+91 84953 88953\"\n        },\n        \"car\": {\n            \"color\": \"Red\",\n            \"regNo\": \"TN 09 L 4508\",\n            \"model\": \"Honda\",\n            \"lastSeen\": \"2019-06-02\",\n            \"location\": \"Mandaveli\",\n            \"image\": \"\",\n            \"description\": \"A huge dent on the front passenger door\"\n        },\n        \"active\": true,\n        \"assigned\": false\n    },\n    \"code\": 200,\n    \"message\": \"Successfully updated case\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Check For New Case",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyOTU4NTIsInVzZXJJRCI6IjVlYzllMGQ5NzhiNmNlZGM4ZDlkYzY4OCJ9.I8-Lv-H8jni68T0u0M8AiM6tAekDCDk5soaRKvQOekE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/admin/checkForNewCase",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"checkForNewCase"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -5,7 +5,9 @@
 Application for reporting stolen cars
 
 Frontend - [carjacked.now.sh](https://carjacked.now.sh)
-Backend - [carjacked.herokuapp.com/](https://carjacked.herokuapp.com/)
+Backend - [carjacked.herokuapp.com](https://carjacked.herokuapp.com/)
+
+Check out the API Documentation [here](./Documentation/API.md).
 
 ## Stack
 
@@ -48,7 +50,7 @@ Please refer the client [README.md](./client/README.md) to start the client serv
 
 ### Using Docker Compose
 
-The whole app can be ran locally by using docker compose as the all parts of the app are containerized.
+The whole app can be ran locally by with a single command using docker compose as the all parts of the app are containerized.
 
 ```bash
   git clone https://github.com/R3l3ntl3ss/CarJacked

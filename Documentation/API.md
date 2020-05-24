@@ -1,5 +1,7 @@
 # API Documentation
 
+Check out the frontend documentation [here](./Frontend.md).
+
 The API router is divided into three controller groups
 
 - [Case](#case)
